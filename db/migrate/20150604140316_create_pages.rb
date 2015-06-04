@@ -5,9 +5,9 @@ class CreatePages < ActiveRecord::Migration
       t.string  :url
       t.string  :title
       t.string  :body
-      t.bool    :has_left_sidebar
+      t.boolean :has_left_sidebar
       t.string  :left_sidebar
-      t.bool    :has_right_sidebar
+      t.boolean :has_right_sidebar
       t.string  :right_sidebar
 
       t.datetime "created_at"
