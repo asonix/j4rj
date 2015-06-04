@@ -2,17 +2,25 @@
   <div class="container">
     <div class="form">
 
-      <h1>Sign up</h1>
+      <h1>Create New Account</h1>
 
-      <%= form_for(@user) do |f| %>
-        <%= f.text_field :username, :placeholder => "Username" %>
-        <%= f.email_field :email, :placeholder => "Email" %>
-        <%= f.password_field :password, :placeholder => "Password" %>
-        <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %>
-        <%= f.submit "Create an account", class: "btn-submit" %>
-      <% end %>
+      <div class="form new_user_form">
+        <%= form_for(@user) do |f| %>
+          <h2>Update Account Info</h2>
+          <%= f.text_field :username, :placeholder => "Username" %>
+          <%= f.email_field :email, :placeholder => "Email" %>
+          <%= f.text_field :image, :placeholder => "Image" %>
+          <ul>
+            <% @permissions.each do |x| %>
+              <li><%= f.check_box x.name %></li>
+            <% end %>
+          </ul>
+          <%= f.password_field :password, :placeholder => "New Password" %>
+          <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %>
+          <%= f.submit "Create User", class: "btn-submit" %>
+        <% end %>
+      </div>
 
     </div>
   </div>
 </div>
-

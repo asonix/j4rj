@@ -1,0 +1,14 @@
+<div class="profile">
+  <div class="container">
+
+      <h1>Account Info</h1>
+
+      <%= image_tag @user.image %>
+      <%= @user.username %><br>
+      <%= @user.first_name %>
+      <%= @user.last_name %><br>
+      <%= @user.email %><br>
+      <%= link_to edit_user_path(@user.id) %>
+
+  </div>
+</div>

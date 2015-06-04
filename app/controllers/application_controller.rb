@@ -12,4 +12,12 @@ class ApplicationController < ActionController::Base
   def require_user
     redirect_to '/login' unless current_user
   end
+
+  def require_admin
+    redirect_to '/' unless current_user.has_permission?('admin')
+  end
+
+  def require_permission(permission)
+    redirect_to '/' unless current_user.has_permission?(permission)
+  end
 end

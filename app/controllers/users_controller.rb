@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @permissions = Permission.all
   end
 
   def create
@@ -23,13 +24,26 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @permissions = Permission.all
   end
 
   def update
     @user = User.find(params[:id])
 
-    if @user.update(user_params)
-      redirect_to user_path(@user)
+    case params[:form_type]
+    when 'general'
+      if @user.update(general_params)
+        redirect_to user_path(@user)
+      else
+        render 'edit'
+      end
+    when 'password'
+      @current_user = User.find(session[:user_id])
+      if @current_user.authenticate(params[:password])
+        @User.password = new_password
+      else
+        render 'edit'
+      end
     else
       render 'edit'
     end
@@ -44,6 +58,9 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_verification, :roles)
+    params.require(:user).permit(:username, :first_name, :last_name, :email, :image, :password, :password_confimation, :permissions)
+  end
+  def general_params
+    params.require(:user).permit(:email, :image, :form_type, :permissions)
   end
 end

@@ -5,5 +5,10 @@ class User < ActiveRecord::Base
   has_secure_password
 
   validates_confirmation_of :password
+  validates_confirmation_of :new_password
+
+  def has_permission?(permission)
+    self.permissions.find_by(name: permission).nil?
+  end
 
 end
