@@ -6,6 +6,4 @@ Things you may want to cover:
 
 * Ruby v2.2.2p95 with Rails v4.2.1
 
-* libxslt development package, libxml2 development packages
-
-* Postgresql v9.3
+* Depends: libxslt development package, libxml2 development packages, Postgresql v9.3
