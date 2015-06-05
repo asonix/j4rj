@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   before_action :require_user
   before_action :require_admin, except: [:show]
 
+  def index
+    @users = User.all
+  end
+
   def new
     @user = User.new
     @permissions = Permission.all
@@ -44,7 +48,7 @@ class UsersController < ApplicationController
       @current_user = User.find(session[:user_id])
       if @current_user.authenticate(params[:user][:current_password])
         if @user.update(password_params)
-          redirect_to user_path(@user)
+          redirect_to "/profile/#{@user.username}"
         else
           render 'edit'
         end
@@ -58,7 +62,7 @@ class UsersController < ApplicationController
         @user.roles.create(permission: Permission.find_by(name: x))
       end
       @user.save
-      redirect_to "/profile/#{@user.username}"
+      redirect_to "/profiles"
     else
       render 'edit'
     end

@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :require_user, except: [:index, :show]
   before_action :require_editor, except: [:index, :show]
 
   def index

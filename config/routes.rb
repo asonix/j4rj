@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   get 'signup' => 'individual_users#new'
   post 'signup' => 'individual_users#create'
-  resources :individual_users
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
@@ -19,6 +18,7 @@ Rails.application.routes.draw do
   get 'edit/profile' => 'individual_users#edit'
   patch 'edit/profile' => 'individual_users#update'
 
+  get 'profiles' => 'users#index'
   get 'profile/:id' => 'users#show'
   get 'edit/profile/:id' => 'users#edit'
   patch 'edit/profile/:id' => 'users#update'
