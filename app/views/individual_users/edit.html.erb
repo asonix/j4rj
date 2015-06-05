@@ -4,25 +4,25 @@
       <h1>My Account</h1>
 
       <div class="form general_form">
-        <%= form_for(@individual_user) do |f| %>
+        <%= form_for(@user, url: "/edit/profile")  do |f| %>
           <h2>Update Account Info</h2>
-          <%= f.text_field :username, :placeholder => "Username" %>
-          <%= f.text_field :first_name, :placeholder => "First name" %>
-          <%= f.text_field :last_name, :placeholder => "last name" %>
-          <%= f.email_field :email, :placeholder => "Email" %>
-          <%= f.text_field :image, :placeholder => "Image" %>
-          <input type="hidden" name="form_type" value="password">
+          <%= f.text_field :username, :placeholder => "Username" %><br>
+          <%= f.text_field :first_name, :placeholder => "First name" %><br>
+          <%= f.text_field :last_name, :placeholder => "last name" %><br>
+          <%= f.email_field :email, :placeholder => "Email" %><br>
+          <%= f.text_field :image, :placeholder => "Image" %><br>
+          <input type="hidden" name="form_type" value="general">
           <%= f.submit "Update Info", class: "btn-submit" %>
         <% end %>
       </div>
 
       <div class="form password_form">
-        <%= form_for(@individual_user) do |f| %>
+        <%= form_for(@user, url: "/edit/profile") do |f| %>
           <h2>Change Password</h2>
-          <%= f.password_field :password, :placeholder => "New Password" %>
-          <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %>
+          <%= f.password_field :password, :placeholder => "New Password" %><br>
+          <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %><br>
           <br>
-          <%= f.password_field :current_password, :placeholder => "Password" %>
+          <%= f.password_field :current_password, :placeholder => "Password" %><br>
           <input type="hidden" name="form_type" value="password">
           <%= f.submit "Change Password", class: "btn-submit" %>
         <% end %>

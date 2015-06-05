@@ -7,15 +7,21 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  get 'signup' => 'individual_users#new'
-  post 'signup' => 'individual_users#create'
-  resources :individual_users
-
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
 
+  get 'signup' => 'individual_users#new'
+  post 'signup' => 'individual_users#create'
+
+  get 'profile' => 'individual_users#show'
+  get 'edit/profile' => 'individual_users#edit'
+  patch 'edit/profile' => 'individual_users#update'
+
+  get 'profiles' => 'users#index'
   get 'profile/:id' => 'users#show'
+  get 'edit/profile/:id' => 'users#edit'
+  patch 'edit/profile/:id' => 'users#update'
   resources :users
 
   get 'new/page' => 'pages#new'
@@ -25,8 +31,9 @@ Rails.application.routes.draw do
   post 'edit/page/:url' => 'pages#update'
   resources :pages
 
+  #MUST GO LAST
   get ':url' => 'pages#show'
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

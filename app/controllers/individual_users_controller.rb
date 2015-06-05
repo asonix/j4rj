@@ -28,28 +28,29 @@ class IndividualUsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
 
     case params[:form_type]
     when 'general'
-      if @user.update(general_params)
-        redirect_to user_path(@user)
+      params[:user].delete(:form_type)
+      if @user.update_attributes(general_params)
+        redirect_to '/profile'
       else
-        render 'edit'
+        render 'individual_users/edit'
       end
     when 'password'
-      @current_user = User.find(session[:user_id])
-      if @current_user.authenticate(params[:current_password])
-        if @current_user.update(password_prams)
-          redirect_to user_path(@user)
+      params[:form_type] = nil
+      if @user.authenticate(params[:user][:current_password])
+        if @user.update(password_params)
+          redirect_to '/profile'
         else
-          render 'edit'
+          render 'individual_users/edit'
         end
       else
-        render 'edit'
+        render 'individual_users/edit'
       end
     else
-      render 'edit'
+      render 'individual_users/edit'
     end
   end
 
@@ -62,12 +63,12 @@ class IndividualUsersController < ApplicationController
 
   private
   def user_params
-    params.require(:individual_user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
   def general_params
-    params.require(:individual_user).permit(:username, :email, :image, :form_type, :permissions)
+    params.require(:user).permit(:username, :first_name, :last_name, :email, :image)
   end
   def password_params
-    params.require(:individual_user).permit(:password, :password_confirmation)
+    params.require(:user).permit(:password, :password_confirmation)
   end
 end
