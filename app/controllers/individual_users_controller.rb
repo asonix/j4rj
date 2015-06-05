@@ -1,5 +1,5 @@
 class IndividualUsersController < ApplicationController
-  before_action :require_user, except: [:show]
+  before_action :require_user, except: [:new, :create, :show]
 
   def new
     @user = User.new
