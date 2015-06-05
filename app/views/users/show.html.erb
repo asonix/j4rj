@@ -3,7 +3,9 @@
 
       <h1>Account Info</h1>
 
-      <%= image_tag @user.image %>
+      <% unless @user.image.nil? %>
+        <%= image_tag @user.image %>
+      <% end %>
       <%= @user.username %><br>
       <%= @user.first_name %>
       <%= @user.last_name %><br>

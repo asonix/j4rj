@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_login
+  before_action :require_user
   before_action :require_admin, except: [:show]
 
   def new
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to '/'
     else
-      redirect_to '/signup'
+      redirect_to '/profile/#{@user.id}'
     end
   end
 
@@ -39,8 +39,12 @@ class UsersController < ApplicationController
       end
     when 'password'
       @current_user = User.find(session[:user_id])
-      if @current_user.authenticate(params[:password])
-        @User.password = new_password
+      if @current_user.authenticate(params[:current_password])
+        if @user.update(password_params)
+          redirect_to user_path(@user)
+        else
+          render 'edit'
+        end
       else
         render 'edit'
       end
@@ -58,9 +62,12 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :first_name, :last_name, :email, :image, :password, :password_confimation, :permissions)
+    params.require(:user).permit(:username, :first_name, :last_name, :email, :image, :password, :password_confirmation)
   end
   def general_params
-    params.require(:user).permit(:email, :image, :form_type, :permissions)
+    params.require(:user).permit(:email, :image, :permissions)
+  end
+  def password_params
+    params.require(:individual_user).permit(:password, :password_confirmation)
   end
 end

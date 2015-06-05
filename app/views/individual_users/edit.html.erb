@@ -4,7 +4,7 @@
       <h1>My Account</h1>
 
       <div class="form general_form">
-        <%= form_for(@user) do |f| %>
+        <%= form_for(@individual_user) do |f| %>
           <h2>Update Account Info</h2>
           <%= f.text_field :username, :placeholder => "Username" %>
           <%= f.text_field :first_name, :placeholder => "First name" %>
@@ -17,12 +17,12 @@
       </div>
 
       <div class="form password_form">
-        <%= form_for(@user) do |f| %>
+        <%= form_for(@individual_user) do |f| %>
           <h2>Change Password</h2>
-          <%= f.password_field :new_password, :placeholder => "New Password" %>
-          <%= f.password_field :new_password_confirmation, :placeholder => "Confirm Password" %>
+          <%= f.password_field :password, :placeholder => "New Password" %>
+          <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %>
           <br>
-          <%= f.password_field :password, :placeholder => "Password" %>
+          <%= f.password_field :current_password, :placeholder => "Password" %>
           <input type="hidden" name="form_type" value="password">
           <%= f.submit "Change Password", class: "btn-submit" %>
         <% end %>

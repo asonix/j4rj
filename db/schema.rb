@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603152703) do
+ActiveRecord::Schema.define(version: 20150604143749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,35 @@ ActiveRecord::Schema.define(version: 20150603152703) do
   end
 
   add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "parent_page_id"
+    t.string   "url"
+    t.string   "title"
+    t.string   "body"
+    t.boolean  "has_left_sidebar"
+    t.string   "left_sidebar"
+    t.boolean  "has_right_sidebar"
+    t.string   "right_sidebar"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "permission_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "roles", ["permission_id"], name: "index_roles_on_permission_id", using: :btree
+  add_index "roles", ["user_id"], name: "index_roles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
