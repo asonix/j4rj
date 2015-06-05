@@ -1,14 +1,16 @@
 <div class="profile">
   <div class="container">
 
-      <h1>Account Info</h1>
+      <h1>My Account Info</h1>
 
-      <%= image_tag @individual_user.image %>
-      <%= @individual_user.username %><br>
-      <%= @individual_user.first_name %>
-      <%= @individual_user.last_name %><br>
-      <%= @individual_user.email %><br>
-      <%= link_to edit_user_path(@individual_user.id) %>
+      <% unless @user.image.nil? %>
+        <%= image_tag @user.image %>
+      <% end %>
+      <%= @user.username %><br>
+      <%= @user.first_name %>
+      <%= @user.last_name %><br>
+      <%= @user.email %><br>
+      <%= link_to "Edit", '/edit/profile' %>
 
   </div>
 </div>
