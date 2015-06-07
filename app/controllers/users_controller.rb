@@ -8,15 +8,22 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @permissions = Permission.all
+    @permissions = @user.permissions.pluck(:name).join(',')
   end
 
   def create
     @user = User.new(user_params)
 
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to '/'
+
+      params['permissions'].split(',').each do |x|
+        puts "ADDING #{x} TO USER"
+        @user.roles.create(permission: Permission.find_by(name: x))
+      end
+      
+      if @user.save
+        redirect_to '/'
+      end
     else
       redirect_to "/profile/#{@user.username}"
     end
