@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="form">
+
+    <h1>Edit Page</h1>
+
+    <div class="form new_user_form">
+      <%= form_for(@page) do |f| %>
+        <%= f.text_field :parent_page_id, :placeholder => "Parent Page ID" %><br>
+        <%= f.text_field :url, :placeholder => "URL" %><br>
+        <%= f.text_field :title, :placeholder => "Title" %><br>
+        <%= f.text_area  :body, :placeholder => "Body" %><br>
+        <%= f.check_box  :has_left_sidebar %><br>
+        <%= f.text_area  :left_sidebar, :placeholder => "Left Sidebar" %><br>
+        <%= f.check_box  :has_right_sidebar %><br>
+        <%= f.text_area  :right_sidebar, :placeholder => "Right Sidebar" %><br>
+        <br>
+        <%= f.submit "Create Page", class: "btn-submit" %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+

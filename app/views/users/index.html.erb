@@ -1,0 +1,24 @@
+<h1>Users</h1>
+
+<%= link_to 'New user', new_user_path %>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+    <th colspan="3"></th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.username %></td>
+      <td><%= user.email %></td>
+      <% if user.id == current_user.id %>
+        <td><%= link_to 'Show', "/profile" %></td>
+      <% else %>
+        <td><%= link_to 'Show', "/profile/#{user.username}" %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+

@@ -1,0 +1,20 @@
+<div class="page">
+  <% if @page.has_left_sidebar %>
+    <div class="left_sidebar">
+      <%= @page.left_sidebar %>
+  </div>
+  <% end %>
+  <div class="main_content">
+    <div class="title">
+      <%= @page.title %>
+    </div>
+    <div class="content">
+      <%= @page.body %>
+    </div>
+  </div>
+  <% if @page.has_right_sidebar %>
+    <div class="right_sidebar">
+      <%= @page.right_sidebar %>
+    </div>
+  <% end %>
+</div>
