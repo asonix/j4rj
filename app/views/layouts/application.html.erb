@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>J4rj</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title>J4rj</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <script type="text/javascript" data-turbolinks-eval=always>
+      $(document).on('page:change', function() {
+        navDropdown();
+      });
+    </script>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <nav>
+      <div class="expand">
+        <%= link_to raw('<div class="title">Home</div>'), '/' %>
+        <div class="content hide">
+          <%= link_to raw('<div class="item">Articles</div>'), controller: 'articles' %>
+          <% if current_user %>
+            <% if current_user.has_permission?('admin') %>
+              <%= link_to raw('<div class="item">Users</div>'), '/profiles' %>
+            <% end %>
+            <% if current_user.has_permission?('editor') %>
+              <%= link_to raw('<div class="item">New page</div>'), '/new/page' %>
+            <% end %>
+            <%= link_to raw('<div class="item">My Account</div>'), '/profile' %>
+          <% end %>
+          <% @info.each do |title, url| %>
+            <%= link_to raw("<div class=\"item\">#{title}</div>"), "/#{url}" %>
+          <% end %>
+          <% if current_user %>
+            <%= link_to raw('<div class="item">Logout</div>'), '/logout' %>
+          <% else %>
+            <%= link_to raw('<div class="item">Login</div>'), '/login' %>
+            <%= link_to raw('<div class="item">Signup</div>'), '/signup' %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+    <%= yield %>
+  
+  </body>
 </html>
