@@ -51,9 +51,11 @@ class ApplicationController < ActionController::Base
       else
         if parent == page_id
           unless @page_ids.include?(id)
-            puts "parent of #{title}: #{parent}"
-            puts "page_id of #{page_title}: #{page_id}"
-            output += make_item(title, url, id)
+            if parent.nil?
+              output += make_link(title, url)
+            else
+              output += make_item(title, url, id)
+            end
           end
         end
       end
@@ -68,13 +70,18 @@ class ApplicationController < ActionController::Base
   def page_has_children(id)
     Page.exists?(parent_page_id: id)
   end
+
+  def make_title(page_title, page_url)
+    output  = "<a href=\"/#{page_url}\">"
+    output += "<div class=\"title\">#{page_title}</div>"
+    output += "</a>"
+    return output
+  end
   
   def open_expand(page_title, page_url, page_id)
     @page_ids.push(page_id)
     output  = "<div class=\"expand\">"
-    output += "<a href=\"/#{page_url}\">"
-    output += "<div class=\"title\">#{page_title}</div>"
-    output += "</a>"
+    output += make_title(page_title, page_url)
     output += "<div class=\"content hide\">"
     return output
   end
@@ -83,6 +90,13 @@ class ApplicationController < ActionController::Base
     return "</div></div>"
   end
 
+  def make_link(page_title, page_url)
+    output  = "<div class=\"link\">"
+    output += make_title(page_title, page_url)
+    output += "</div>"
+    return output
+  end
+  
   def make_item(page_title, page_url, page_id)
     @page_ids.push(page_id)
     output  = "<a href=\"/#{page_url}\">"

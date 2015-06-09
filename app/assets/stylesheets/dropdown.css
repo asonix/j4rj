@@ -19,8 +19,6 @@ nav .link .title,
   left: 0;
   right: 0;
   padding: 0.5em 0.5em;
-  padding-right: 1em;
-  padding-left: 0em;
   font-size: 1.3em;
   cursor: default;
   z-index: 0;
@@ -71,6 +69,7 @@ nav .link .title {
 .expand .heading {
   position: relative;
   padding: .75em .5em;
+  min-width: 100px;
   white-space: nowrap;
   font-weight: 200;
 }
@@ -94,7 +93,7 @@ nav .link .title {
   position: relative;
   left: 0;
   right: 0;
-  min-width: 170px;
+  min-width: 100px;
   font-size: 1em;
   padding: .75em .5em;
 }
