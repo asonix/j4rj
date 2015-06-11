@@ -32,7 +32,19 @@ Rails.application.routes.draw do
   resources :pages
 
   #MUST GO LAST
-  get ':url' => 'pages#show'
+  # get ':url1' => 'pages#show'
+  # get ':url1/:url2' => 'pages#show'
+  # get ':url1/:url2/:url3' => 'pages#show'
+  # get ':url1/:url2/:url3/:url4' => 'pages#show'
+  # get ':url1/:url2/:url3/:url4/:url5' => 'pages#show'
+
+  #MUST GO LAST
+  url = ":url1"
+  get url => 'pages#show'
+  (2..5).each do |x|
+    url += "/:url#{x}"
+    get url => 'pages#show'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

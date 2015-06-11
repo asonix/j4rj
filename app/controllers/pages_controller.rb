@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   before_action :require_user, except: [:show]
   before_action :require_editor, except: [:show]
 
+  include NavigationHelper
+
   def new
     @page = Page.new
   end
@@ -10,7 +12,7 @@ class PagesController < ApplicationController
     @page = Page.new(page_params)
 
     if @page.save
-      redirect_to "/#{@page.url}"
+      redirect_to custom_url(@page)
     else
       render 'new'
     end
@@ -24,14 +26,22 @@ class PagesController < ApplicationController
     @page = Page.find_by(url: params[:url])
 
     if @page.update(page_params)
-      redirect_to "/#{@page.url}"
+      redirect_to custom_url(@page)
     else
       render 'edit'
     end
   end
 
   def show
-    @page = Page.find_by(url: params[:url])
+    @page = Page.find_by(url: params["url1"])
+    (2..5).each do |x|
+      unless params["url#{x}"].nil?
+        puts "url#{x} not nill"
+        @page = Page.find_by(url: params["url#{x}"], parent_page_id: @page.id)
+      else
+        break
+      end
+    end
   end
 
   def destroy
