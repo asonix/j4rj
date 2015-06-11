@@ -19,4 +19,6 @@
   <% end %>
 </div>
 
-<%= link_to 'Edit', "/edit/page/#{@page.id}" %>
+<% if current_user and current_user.has_permission?("editor") %>
+  <%= link_to 'Edit', "/edit/page/#{@page.id}" %>
+<% end %>

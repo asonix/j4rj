@@ -1,14 +1,35 @@
 nav {
-  background-color: #007efc;
+  background-color: #3f51b5;
   color: #f9f9f9;
   font-weight: 400;
-  text-shadow: 0 1px 1px #000;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 1px;
+  /*text-shadow: 0 1px 1px #000;*/
+  /*text-align: center;*/
 }
 
-nav a {
+nav .expand a,
+nav .link a {
+  color: #fff;
   text-decoration: none
 }
+
+nav .expand .content a {
+  color: #333;
+}
+
+nav > div > .link > a .title,
+nav > div > .expand > a .title {
+  border-top: 4px transparent solid;
+  border-bottom: 4px transparent solid;
+}
+nav > div > .link:hover > a .title,
+nav > div > .expand:hover > a .title {
+  border-top: 4px transparent solid;
+  border-bottom: 4px #ff4081 solid;
+}
+
 nav .link,
 nav .expand {
   position: relative;
@@ -24,11 +45,11 @@ nav .link .title,
   right: 0;
   padding: 0.5em 0.5em;
   font-size: 1.3em;
-  cursor: default;
+  /*cursor: default;*/
   z-index: 0;
 }
 nav .link .title {
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 
 
@@ -50,17 +71,17 @@ nav .link .title {
   padding: .25em 0;
   color: #222;
   background-color: #fff;
-  text-shadow: 0 0 0;
-  box-shadow: 0px 0px 3px #000;
+  /*text-shadow: 0 0 0;*/
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
   z-index: 10;
   -webkit-transition: opacity 0.3s, visibility 0s;
           transition: opacity 0.3s, visibility 0s;
 }
 .expand .item {
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 .expand .expand {
-  cursor: default;
+  /*cursor: default;*/
   width: 100%;
   position: relative;
   padding: 0;
@@ -87,12 +108,12 @@ nav .link .title {
 .expand .highlight {
   color: #be0c45;
   font-weight: 500;
-  text-shadow: 0 0 3px #dedede;
+  /*text-shadow: 0 0 3px #dedede;*/
 }
 
 .expand .heading {
   font-weight: bold;
-  cursor: default;
+  /*cursor: default;*/
 }
 
 .expand .expand .title {

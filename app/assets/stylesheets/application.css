@@ -14,6 +14,12 @@
  *= require_self
  */
 
+body {
+  font-family: Droid Sans;
+  background: #ececec;
+  margin: 0;
+}
+
 .page {
   display: flex;
 }
@@ -28,16 +34,15 @@
   min-width: 20%;
   width: 20%;
   max-width: 20%;
-  background-color: #eee;
 }
 
 .main_content {
   width: 100%;
+  background-color: #fff;
 }
 
 .right_sidebar {
   min-width: 20%;
   width: 20%;
   max-width: 20%;
-  background-color: #eee;
 }

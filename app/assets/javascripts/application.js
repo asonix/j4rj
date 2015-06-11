@@ -15,3 +15,12 @@
 //= require turbolinks
 //= require_tree .
 
+window.onscroll = function() {
+  if $(document).scrollTop() == 0 {
+    $("header").class("header-top")
+    $(".wrapper").class(".wrapper wrapper-top")
+  } else if $(document).scrollTop > 0 && $("header").class() == "header-top" {
+    $("header").class("")
+    $(".wrapper").class(".wrapper")
+  }
+}

@@ -8,9 +8,9 @@ module ApplicationHelper
   def make_dropdown(page_title="", page_url="", page_id=nil)
     output = ""
     if page_id.nil?
-      info = Page.all.pluck(:title, :url, :id, :parent_page_id)
+      info = Page.order(parent_page_id: :desc, title: :asc).pluck(:title, :url, :id, :parent_page_id)
     else
-      info = Page.where(parent_page_id: page_id).pluck(:title, :url, :id, :parent_page_id)
+      info = Page.order(parent_page_id: :desc, title: :asc).where(parent_page_id: page_id).pluck(:title, :url, :id, :parent_page_id)
       output += open_expand(page_title, page_url, page_id)
     end
     info.each do |title, url, id, parent|

@@ -5,35 +5,47 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <nav>
-      <div class="expand">
-        <%= link_to raw('<div class="title">Home</div>'), '/' %>
-        <div class="content hide">
-          <%= link_to raw('<div class="item">Articles</div>'), controller: 'articles' %>
-          <% if current_user %>
-            <% if current_user.has_permission?('admin') %>
-              <%= link_to raw('<div class="item">Users</div>'), '/profiles' %>
-            <% end %>
-            <% if current_user.has_permission?('editor') %>
-              <%= link_to raw('<div class="item">New page</div>'), '/new/page' %>
-            <% end %>
-            <%= link_to raw('<div class="item">My Account</div>'), '/profile' %>
-          <% end %>
-
-
-          <% if current_user %>
-            <%= link_to raw('<div class="item">Logout</div>'), '/logout' %>
-          <% else %>
-            <%= link_to raw('<div class="item">Login</div>'), '/login' %>
-            <%= link_to raw('<div class="item">Signup</div>'), '/signup' %>
-          <% end %>
+    <header>
+      <nav>
+        <div class="nav-left">
+          <div class="expand">
+            <%= link_to raw('<div class="title">Home</div>'), '/' %>
+            <div class="content hide">
+              <%= link_to raw('<div class="item">Articles</div>'), controller: 'articles' %>
+              <% if current_user %>
+                <% if current_user.has_permission?('admin') %>
+                  <%= link_to raw('<div class="item">Users</div>'), '/profiles' %>
+                <% end %>
+                <% if current_user.has_permission?('editor') %>
+                  <%= link_to raw('<div class="item">New page</div>'), '/new/page' %>
+                <% end %>
+              <% end %>
+            </div>
+          </div><%= raw(serve_dropdown) %>
         </div>
-      </div><%= raw(serve_dropdown) %>
-    </nav>
+        <div class="nav-right">
+          <% if current_user %>
+            <div class="expand">
+              <%= link_to raw('<div class="title">My Account</div>'), '/profile' %>
+              <div class="content hide">
+                <%= link_to raw('<div class="item">Logout</div>'), '/logout' %>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <div class="link">
+            <%= link_to raw('<div class="title">Signup</div>'), '/signup' %>
+          </div><div class="link">
+            <%= link_to raw('<div class="title">Login</div>'), '/login' %>
+          </div>
+        <% end %>
+      </nav>
+    </header>
 
     <%= yield %>
-  
+
   </body>
 </html>
