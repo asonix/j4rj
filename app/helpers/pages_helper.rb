@@ -3,6 +3,8 @@ module PagesHelper
   def page_exists?(url, parent, id)
     if parent == ""
       parent = nil
+    else
+      parent = parent.to_i
     end
     existing_page = Page.find_by(parent_page_id: parent, url: url)
     puts "Checking if pages is nil: #{existing_page.nil?}"

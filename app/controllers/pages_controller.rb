@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   def create
     @page = Page.new(page_params)
 
-    if page_exists?(@page)
+    if page_exists?(@page.url, @page.parent_page_id, @page.id)
       render 'new'
       return
     end
@@ -44,8 +44,9 @@ class PagesController < ApplicationController
   end
 
   def show
+    m_url = Rails.application.config.max_url_length
     @page = Page.find_by(url: params["url1"], parent_page_id: nil)
-    (2..5).each do |x|
+    (2..m_url).each do |x|
       unless params["url#{x}"].nil?
         puts "url#{x} not nill"
         @page = Page.find_by(url: params["url#{x}"], parent_page_id: @page.id)

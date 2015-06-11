@@ -41,7 +41,8 @@ Rails.application.routes.draw do
   #MUST GO LAST
   url = ":url1"
   get url => 'pages#show'
-  (2..5).each do |x|
+  m_url = Rails.application.config.max_url_length
+  (2..m_url).each do |x|
     url += "/:url#{x}"
     get url => 'pages#show'
   end
