@@ -27,8 +27,8 @@ Rails.application.routes.draw do
   get 'new/page' => 'pages#new'
   post 'new/page' => 'pages#create'
 
-  get 'edit/page/:url' => 'pages#edit'
-  post 'edit/page/:url' => 'pages#update'
+  get 'edit/page/:id' => 'pages#edit'
+  post 'edit/page/:id' => 'pages#update'
   resources :pages
 
   #MUST GO LAST
