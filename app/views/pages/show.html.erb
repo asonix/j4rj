@@ -1,20 +1,22 @@
 <div class="page">
   <% if @page.has_left_sidebar %>
     <div class="left_sidebar">
-      <%= @page.left_sidebar %>
+      <%= raw(@page.left_sidebar) %>
   </div>
   <% end %>
-  <div class="main_content">
-    <div class="title">
-      <%= @page.title %>
-    </div>
-    <div class="content">
-      <%= @page.body %>
-    </div>
-  </div>
+  <section class="main_content">
+    <article>
+      <div class="title">
+        <h2><%= raw(@page.title) %></h2>
+      </div>
+      <div class="content">
+        <%= raw(@page.body) %>
+      </div>
+    </article>
+  </section>
   <% if @page.has_right_sidebar %>
     <div class="right_sidebar">
-      <%= @page.right_sidebar %>
+      <%= raw(@page.right_sidebar) %>
     </div>
   <% end %>
 </div>
