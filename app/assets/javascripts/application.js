@@ -15,12 +15,14 @@
 //= require turbolinks
 //= require_tree .
 
+toggled = false;
+
 window.onscroll = function() {
-  if $(document).scrollTop() == 0 {
-    $("header").class("header-top")
-    $(".wrapper").class(".wrapper wrapper-top")
-  } else if $(document).scrollTop > 0 && $("header").class() == "header-top" {
-    $("header").class("")
-    $(".wrapper").class(".wrapper")
+  if ($(document).scrollTop() == 0) {
+    $("header").toggleClass("header-top");
+    toggled = false;
+  } else if (toggled == false) {
+    $("header").toggleClass("header-top");
+    toggled = true;
   }
 }

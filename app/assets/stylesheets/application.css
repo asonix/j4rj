@@ -20,6 +20,20 @@ body {
   margin: 0;
 }
 
+header {
+  position: fixed;
+  left: 0; right: 0;
+}
+
+.header-top {
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.wrapper {
+  padding-top: 54px;
+  width: 100%;
+}
+
 .page {
   display: flex;
 }

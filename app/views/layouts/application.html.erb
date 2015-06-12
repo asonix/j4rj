@@ -44,8 +44,16 @@
         <% end %>
       </nav>
     </header>
+    
+    <div class="wrapper">
+      <%= yield %>
+    </div>
 
-    <%= yield %>
+    <footer>
+      <div class="centered">
+        Copyright &copy; Riley Trautman 2015
+      </div>
+    </footer>
 
   </body>
 </html>
