@@ -1,7 +1,9 @@
-<%= form_for(:session, url: login_path) do |f| %>
-  <%= f.text_field :username, :placeholder => "Username" %>
-  <%= f.password_field :password, :placeholder => "Password" %>
-  <%= f.submit "Log in", class: "btn-submit" %>
-<% end %>
+<div class="container">
+  <%= form_for(:session, url: login_path) do |f| %>
+    <%= f.text_field :username, :placeholder => "Username" %>
+    <%= f.password_field :password, :placeholder => "Password" %>
+    <%= f.submit "Log in", class: "btn-submit" %>
+  <% end %>
 
-<%= link_to "Don't have an account? Click here!", "/signup" %>
+  <%= link_to "Don't have an account? Click here!", "/signup" %>
+</div>
