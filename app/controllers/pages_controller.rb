@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   before_action :require_user, except: [:show]
   before_action :require_editor, except: [:show]
 
+  helper PagesHelper
+
   include NavigationHelper
   include PagesHelper
 

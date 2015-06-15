@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require turbolinks
 //= require_tree .
 
@@ -26,3 +27,19 @@ window.onscroll = function() {
     toggled = true;
   }
 }
+
+var ready = function() {
+  $("body").on('click', '.page-title', function(evt) {
+    evt.preventDefault();
+    var title = $(this).html();
+    var id = $(this).attr('data-id');
+    console.log(title, id);
+
+    $("#dropdownMenu1").find('#selected').html(title);
+    $("#dropdownMenu1").find('#selected').attr('data-id', id);
+    $("#dropdownMenu1").find('input[type=hidden]').val(id);
+  });
+}
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

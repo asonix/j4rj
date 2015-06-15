@@ -13,7 +13,7 @@
         <div class="nav-left">
           <div class="expand">
             <%= link_to raw('<div class="title">Home</div>'), '/' %>
-            <div class="content hide">
+            <div class="content myhide">
               <%= link_to raw('<div class="item">Articles</div>'), controller: 'articles' %>
               <% if current_user %>
                 <% if current_user.has_permission?('admin') %>
@@ -30,7 +30,7 @@
           <% if current_user %>
             <div class="expand">
               <%= link_to raw('<div class="title">My Account</div>'), '/profile' %>
-              <div class="content hide">
+              <div class="content myhide">
                 <%= link_to raw('<div class="item">Logout</div>'), '/logout' %>
               </div>
             </div>

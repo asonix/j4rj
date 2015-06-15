@@ -63,7 +63,7 @@ module ApplicationHelper
     @page_ids.push(page_id)
     output  = "<div class=\"expand\">"
     output += make_title(page_title, page_url)
-    output += "<div class=\"content hide\">"
+    output += "<div class=\"content myhide\">"
     return output
   end
 
