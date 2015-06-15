@@ -18,13 +18,53 @@
               <% if current_user %>
                 <% if current_user.has_permission?('admin') %>
                   <%= link_to raw('<div class="item">Users</div>'), '/profiles' %>
+                  <%= link_to raw('<div class="item">New user</div>'), '/new/user' %>
                 <% end %>
                 <% if current_user.has_permission?('editor') %>
                   <%= link_to raw('<div class="item">New page</div>'), '/new/page' %>
+                  <%= link_to raw('<div class="item">New article</div>'), new_article_path %>
+                  <% unless @page.nil? %>
+                    <% unless @page.id.nil? %>
+                      <%= link_to raw('<div class="item">Edit page</div>'), "/edit/page/#{@page.id}" %>
+                    <% end %>
+                  <% end %>
+                  <% unless @article.nil? %>
+                    <% unless @article.id.nil? %>
+                      <%= link_to raw('<div class="item">Edit article</div>'), edit_article_path %>
+                    <% end %>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>
-          </div><%= raw(serve_dropdown) %>
+          </div><%= raw(serve_dropdown) %><div class="link">
+            <% if not @page.nil? %>
+              <% unless @page.title.nil? %>
+                <%= link_to raw("<div class=\"title\">#{@page.title}</div>"), '' %>
+              <% else %>
+                <%= link_to raw("<div class=\"title\">New Page</div>"), '' %>
+              <% end %>
+            <% elsif not @pages.nil? %>
+              <%= link_to raw("<div class=\"title\">Pages</div>"), '' %>
+            <% elsif not @article.nil? %>
+              <% unless @article.title.nil? %>
+                <%= link_to raw("<div class=\"title\">#{@article.title}</div>"), '' %>
+              <% else %>
+                <%= link_to raw("<div class=\"title\">New Article</div>"), '' %>
+              <% end %>
+            <% elsif not @articles.nil? %>
+              <%= link_to raw("<div class=\"title\">Articles</div>"), '' %>
+            <% elsif not @user.nil? %>
+              <% unless @user.username.nil? %>
+                <%= link_to raw("<div class=\"title\">#{@user.username}</div>"), '' %>
+              <% else %>
+                <%= link_to raw("<div class=\"title\">New User</div>"), '' %>
+              <% end %>
+            <% elsif not @users.nil? %>
+              <%= link_to raw("<div class=\"title\">Users</div>"), '' %>
+            <% elsif not @login.nil? %>
+              <%= link_to raw("<div class=\"title\">Login</div>"), '' %>
+            <% end %>
+          </div>
         </div>
         <div class="nav-right">
           <% if current_user %>
