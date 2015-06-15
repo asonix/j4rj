@@ -3,9 +3,9 @@
 
     <h1>Create New Page</h1>
 
-    <div class="form new_user_form">
+    <div class="form new_page_form">
       <%= form_for(@page) do |f| %>
-        <%= f.text_field :parent_page_id, :placeholder => "Parent Page ID" %><br>
+        <%= raw(page_selector(@page.id)) %>
         <%= f.text_field :url, :placeholder => "URL" %><br>
         <%= f.text_field :title, :placeholder => "Title" %><br>
         <%= f.text_area  :body, :placeholder => "Body" %><br>

@@ -16,18 +16,24 @@ module PagesHelper
   end
 
   def page_selector(id)
+    id ||= -1
     invalid_ids = get_page_id_tree_down(id).push(id)
     pages = Page.where("id not in (?)", invalid_ids)
-    page = Page.find(id)
-    parent_title = page.parent_page_id.nil? ? 'No Parent' : Page.find(page.parent_page_id).title
-    parent_id = page.parent_page_id.nil? ? '' : page.parent_page_id
+    unless id == -1
+      page = Page.find(id)
+      parent_title = page.parent_page_id.nil? ? 'No Parent' : Page.find(page.parent_page_id).title
+      parent_id = page.parent_page_id.nil? ? '' : page.parent_page_id
+    else
+      parent_title = 'No Parent'
+      parent_id = ''
+    end
 
     output  = '<div class="dropdown">'
     output += '<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" >'
     output += "<input type=\"hidden\" name=\"page[parent_page_id]\" value=\"#{parent_id}\">"
     output += "<span id=\"selected\" data-id=\"#{parent_id}\">"
     output += "#{parent_title}"
-    output += '</span>'
+    output += '</span>&nbsp;&nbsp;'
     output += '<span class="caret"></span>'
     output += '</button>'
     output += '<ul class="dropdown-menu" role="menu" aria-labelledby="DropdownMenu1">'

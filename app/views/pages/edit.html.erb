@@ -3,7 +3,7 @@
 
     <h1>Edit Page</h1>
 
-    <div class="form new_user_form">
+    <div class="form new_page_form">
       <%= form_for(@page) do |f| %>
         <%= raw(page_selector(@page.id)) %>
         <%= f.text_field :url, :placeholder => "URL" %><br>
