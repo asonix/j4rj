@@ -7,36 +7,20 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  get 'login' => 'sessions#new'
+  get 'login' => 'sessions#new', as: :login
   post 'login' => 'sessions#create'
-  get 'logout' => 'sessions#destroy'
+  get 'logout' => 'sessions#destroy', as: :logout
 
-  get 'signup' => 'individual_users#new'
+  get 'signup' => 'individual_users#new', as: :signup
   post 'signup' => 'individual_users#create'
+  get 'profile' => 'individual_users#show', as: :profile
+  get 'profile/edit' => 'individual_users#edit', as: :edit_profile
+  patch 'profile' => 'individual_users#update'
 
-  get 'profile' => 'individual_users#show'
-  get 'edit/profile' => 'individual_users#edit'
-  patch 'edit/profile' => 'individual_users#update'
+  resources :users, except: [:show], as: :profiles
+  get 'profiles/:username' => 'users#show'
 
-  get 'profiles' => 'users#index'
-  get 'profile/:id' => 'users#show'
-  get 'edit/profile/:id' => 'users#edit'
-  patch 'edit/profile/:id' => 'users#update'
-  resources :users
-
-  get 'new/page' => 'pages#new'
-  post 'new/page' => 'pages#create'
-
-  get 'edit/page/:id' => 'pages#edit'
-  post 'edit/page/:id' => 'pages#update'
-  resources :pages
-
-  #MUST GO LAST
-  # get ':url1' => 'pages#show'
-  # get ':url1/:url2' => 'pages#show'
-  # get ':url1/:url2/:url3' => 'pages#show'
-  # get ':url1/:url2/:url3/:url4' => 'pages#show'
-  # get ':url1/:url2/:url3/:url4/:url5' => 'pages#show'
+  resources :pages, except: [:show]
 
   #MUST GO LAST
   url = ":url1"

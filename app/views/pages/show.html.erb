@@ -22,5 +22,5 @@
 </div>
 
 <% if current_user and current_user.has_permission?("editor") %>
-  <%= link_to 'Edit', "/edit/page/#{@page.id}" %>
+  <%= link_to 'Edit', edit_page_path(@page) %>
 <% end %>

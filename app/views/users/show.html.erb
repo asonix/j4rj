@@ -10,7 +10,7 @@
       <%= @user.first_name %>
       <%= @user.last_name %><br>
       <%= @user.email %><br>
-      <%= link_to "Edit", "/edit/profile/#{@user.username}" %>
+      <%= link_to "Edit", edit_profile_path(@user) %>
 
   </div>
 </div>

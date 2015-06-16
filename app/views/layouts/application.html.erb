@@ -17,15 +17,15 @@
               <%= link_to raw('<div class="item">Articles</div>'), controller: 'articles' %>
               <% if current_user %>
                 <% if current_user.has_permission?('admin') %>
-                  <%= link_to raw('<div class="item">Users</div>'), '/profiles' %>
-                  <%= link_to raw('<div class="item">New user</div>'), '/new/user' %>
+                  <%= link_to raw('<div class="item">Users</div>'), profiles_path %>
+                  <%= link_to raw('<div class="item">New user</div>'), new_profile_path %>
                 <% end %>
                 <% if current_user.has_permission?('editor') %>
-                  <%= link_to raw('<div class="item">New page</div>'), '/new/page' %>
+                  <%= link_to raw('<div class="item">New page</div>'), new_page_path %>
                   <%= link_to raw('<div class="item">New article</div>'), new_article_path %>
                   <% unless @page.nil? %>
                     <% unless @page.id.nil? %>
-                      <%= link_to raw('<div class="item">Edit page</div>'), "/edit/page/#{@page.id}" %>
+                      <%= link_to raw('<div class="item">Edit page</div>'), edit_page_path(@page) %>
                     <% end %>
                   <% end %>
                   <% unless @article.nil? %>
@@ -36,7 +36,9 @@
                 <% end %>
               <% end %>
             </div>
-          </div><%= raw(serve_dropdown) %><div class="link">
+          </div><%= raw(serve_dropdown) %>
+          <div class="link"><a href=""><div class="title">></div></a></div>
+          <div class="link">
             <% if not @page.nil? %>
               <% unless @page.title.nil? %>
                 <%= link_to raw("<div class=\"title\">#{@page.title}</div>"), '' %>
@@ -63,23 +65,25 @@
               <%= link_to raw("<div class=\"title\">Users</div>"), '' %>
             <% elsif not @login.nil? %>
               <%= link_to raw("<div class=\"title\">Login</div>"), '' %>
+            <% elsif not @home.nil? %>
+              <%= link_to raw("<div class=\"title\">Home</div>"), '' %>
             <% end %>
           </div>
         </div>
         <div class="nav-right">
           <% if current_user %>
             <div class="expand">
-              <%= link_to raw('<div class="title">My Account</div>'), '/profile' %>
+              <%= link_to raw('<div class="title">My Account</div>'), profile_path %>
               <div class="content myhide">
-                <%= link_to raw('<div class="item">Logout</div>'), '/logout' %>
+                <%= link_to raw('<div class="item">Logout</div>'), logout_path %>
               </div>
             </div>
           </div>
         <% else %>
           <div class="link">
-            <%= link_to raw('<div class="title">Signup</div>'), '/signup' %>
+            <%= link_to raw('<div class="title">Signup</div>'), signup_path %>
           </div><div class="link">
-            <%= link_to raw('<div class="title">Login</div>'), '/login' %>
+            <%= link_to raw('<div class="title">Login</div>'), login_path %>
           </div>
         <% end %>
       </nav>

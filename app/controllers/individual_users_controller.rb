@@ -14,7 +14,7 @@ class IndividualUsersController < ApplicationController
     else
       puts 'failed'
       puts params
-      redirect_to '/signup'
+      redirect_to signup_path
     end
   end
 
@@ -34,7 +34,7 @@ class IndividualUsersController < ApplicationController
     when 'general'
       params[:user].delete(:form_type)
       if @user.update_attributes(general_params)
-        redirect_to '/profile'
+        redirect_to profile_path
       else
         render 'individual_users/edit'
       end
@@ -42,7 +42,7 @@ class IndividualUsersController < ApplicationController
       params[:form_type] = nil
       if @user.authenticate(params[:user][:current_password])
         if @user.update(password_params)
-          redirect_to '/profile'
+          redirect_to profile_path
         else
           render 'individual_users/edit'
         end

@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :require_user
   before_action :require_admin, except: [:show]
 
+  include UsersHelper
+
   def index
     @users = User.all
   end
@@ -25,12 +27,16 @@ class UsersController < ApplicationController
         redirect_to '/'
       end
     else
-      redirect_to "/profile/#{@user.username}"
+      redirect_to profiles_path(@user)
     end
   end
 
   def show
-    @user = User.find_by(username: params[:id])
+    if current_user.username == params[:username]
+      redirect_to profile_path
+      return
+    end
+    @user = User.find_by(username: params[:username])
   end
 
   def edit
@@ -46,7 +52,7 @@ class UsersController < ApplicationController
     when 'general'
       params[:form_type] = nil
       if @user.update(general_params)
-        redirect_to user_path(@user)
+        redirect_to profiles_path(@user)
       else
         render 'edit'
       end
@@ -55,7 +61,7 @@ class UsersController < ApplicationController
       @current_user = User.find(session[:user_id])
       if @current_user.authenticate(params[:user][:current_password])
         if @user.update(password_params)
-          redirect_to "/profile/#{@user.username}"
+          redirect_to profiles_path(@user)
         else
           render 'edit'
         end
@@ -69,7 +75,7 @@ class UsersController < ApplicationController
         @user.roles.create(permission: Permission.find_by(name: x))
       end
       @user.save
-      redirect_to "/profiles"
+      redirect_to profile_path
     else
       render 'edit'
     end

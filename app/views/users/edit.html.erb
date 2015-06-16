@@ -4,7 +4,7 @@
       <h1>Account</h1>
 
       <div class="form general_form">
-        <%= form_for(@user, url: "/edit/profile/#{@user.username}") do |f| %>
+        <%= form_for(@user, url: edit_profile_path(@user)) do |f| %>
           <h2>Update Account Info</h2>
           <%= f.email_field :email, :placeholder => "Email" %><br>
           <%= f.text_field :image, :placeholder => "Image" %><br>
@@ -15,7 +15,7 @@
 
       <% if current_user.has_permission?('admin') and current_user.username != @user.id %>
         <div class="form permissions_form">
-          <%= form_for(@user, url: "/edit/profile/#{@user.username}") do |f| %>
+          <%= form_for(@user, url: edit_profile_path(@user)) do |f| %>
             <h2>Change Permissions</h2>
             <%= text_field_tag(:permissions, @permissions) %><br>
             <input type="hidden" name="form_type" value="permissions">
@@ -25,7 +25,7 @@
       <% end %>
 
       <div class="form password_form">
-        <%= form_for(@user, url: "/edit/profile/#{@user.username}") do |f| %>
+        <%= form_for(@user, url: edit_profile_path(@user)) do |f| %>
           <h2>Change Password</h2>
           <%= f.password_field :password, :placeholder => "New Password" %><br>
           <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %><br>

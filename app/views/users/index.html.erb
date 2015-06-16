@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Users</h1>
 
-  <%= link_to 'New user', new_user_path %>
+  <%= link_to 'New user', new_profile_path %>
 
   <table>
     <tr>
@@ -15,9 +15,9 @@
       <td><%= user.username %></td>
       <td><%= user.email %></td>
       <% if user.id == current_user.id %>
-        <td><%= link_to 'Show', "/profile" %></td>
+        <td><%= link_to 'Show', profile_path %></td>
     <% else %>
-        <td><%= link_to 'Show', "/profile/#{user.username}" %></td>
+        <td><%= link_to 'Show', profiles_path(user) %></td>
     <% end %>
     </tr>
   <% end %>
