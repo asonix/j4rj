@@ -24,3 +24,4 @@ j4rj.komodoproject
 
 # sass cache
 /app/assets/stylesheets/.sass-cache
+*.scssc
