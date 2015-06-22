@@ -1,3 +1,44 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "palette";
+
+.page {
+    display: flex;
+    max-width: 1170px;
+
+    .left_sidebar,
+    .main_content,
+    .right_sidebar {
+      flex: 1;
+      word-wrap: break-word;
+      word-break: break-all;
+      padding: 1em;
+      margin: 1em;
+      border-radius: 4px;
+      box-shadow: 0 -1px 0 $shadow-up,0 0 2px $shadow-down-one,0 2px 4px $shadow-down-two;
+      background-color: $primary-color-text; 
+    }
+    
+    .left_sidebar,
+    .right_sidebar {
+      min-width: 20%;
+      width: 20%;
+      max-width: 20%;
+      color: $secondary-text-color;
+    }
+    
+    .main_content {
+      width: 100%;
+      color: $primary-text-color;
+      
+      h2 {
+        margin-top: 0;
+      }
+      
+      .content {
+        text-align: justify;
+      }
+    }
+}
